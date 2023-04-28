@@ -49,5 +49,7 @@ Al usar ROS2 Humble es recomendable activar el discovery-server para que solamen
 
 Para activar el Discovery-Server se siguen las instrucciones del [manual de usuario](https://turtlebot.github.io/turtlebot4-user-manual/setup/discovery_server.html).
 
+Al final de todos los pasos deberemos poder ver todos los topics de la raspberry y del Create 3 desde el PC.
+
 
 
