@@ -1,5 +1,22 @@
 # Documentación de cada tarea relacionada con ROS2
 
+## Prueba de SLAM por defecto
+
+Se ha iniciado el SLAM que viene por defecto en el turtlebot 4. 
+
+Parece que hay un problema en la visualización del lidar en rviz mientras se realiza el SLAM. Parece que no puede realizar la transformada entre el frame `map` y el frame `rplidar_link`:
+
+```
+[rviz2-1] [ERROR] [1683196573.628807857] [rviz2]: Lookup would require extrapolation into the future.  Requested time 1677796205,300857 but the latest data is at time 1677796205,209008, when looking up transform from frame [rplidar_link] to frame [map]
+```
+
+Esto no da problemas a la hora de crear el mapa, ya que parece que el SLAM funciona correctamente y lee los datos del laser bien. 
+
+Este es el mapa que se ha generado tras pasear el Turtlebot por la sala:
+
+<img src="imgs/map_normal.png">
+
+
 ## Lectura de las velocidades y voltajes de las ruedas
 
 Se encuentran los siguientes topics relacionados con información sobre las ruedas:
