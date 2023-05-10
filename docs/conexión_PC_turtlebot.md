@@ -16,10 +16,7 @@ sudo modprobe 88x2bu
 sudo reboot
 ```
 
-Comprobar que aparece el nuevo adaptador:
-```
-ip a
-```
+Comprobar que aparece el nuevo adaptador con `ip a`
 
 Activar modo AP en el adaptador WIFI:
 1. Configuración de wifi
@@ -51,5 +48,30 @@ Para activar el Discovery-Server se siguen las instrucciones del [manual de usua
 
 Al final de todos los pasos deberemos poder ver todos los topics de la raspberry y del Create 3 desde el PC.
 
+## Configurar chrony en el PC
 
+Editar el archivo `/etc/chrony/chrony.conf` y añadir lo siguiente:
+
+```
+# cnfig ntp sync with turtlebot
+server 10.42.0.21 presend 0 minpoll 0 maxpoll 0 iburst  prefer trust
+# enable serving time to ntp clients on 10.42.0.0 subnet
+allow 10.42.0.0/24
+# serve time even offline
+local stratum 10
+```
+
+Tendremos que abrir el puerto 123 en el protocolo UDP para aceptar peticiones NTP:
+
+```Bash
+sudo ufw allow from any to any port 123 proto udp
+```
+
+Y en la Raspberry editar `/etc/chrony/chrony.conf` y añadir: 
+
+```
+server 10.42.0.1 iburst prefer
+```
+
+De esta forma el PC actuará como servidor NTP.
 
