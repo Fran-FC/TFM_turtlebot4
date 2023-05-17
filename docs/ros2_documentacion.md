@@ -1,16 +1,10 @@
 # Documentación de cada tarea relacionada con ROS2
 
-## Prueba de SLAM por defecto
+## SLAM por defecto (slam_toolbox)
 
-Se ha iniciado el SLAM que viene por defecto en el turtlebot 4. 
+Se ha utilizado el paquete SLAM por defecto: [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox), el cual utiliza SLAM basado en un  [problema de optimización de posición en grafos](https://github.com/ceres-solver/ceres-solver/blob/master/examples/slam/pose_graph_2d/README.md) o en inglés *pose graph optimization problem*.
 
-Parece que hay un problema en la visualización del lidar en rviz mientras se realiza el SLAM. Parece que no puede realizar la transformada entre el frame `map` y el frame `rplidar_link`:
-
-```
-[rviz2-1] [ERROR] [1683196573.628807857] [rviz2]: Lookup would require extrapolation into the future.  Requested time 1677796205,300857 but the latest data is at time 1677796205,209008, when looking up transform from frame [rplidar_link] to frame [map]
-```
-
-Esto no da problemas a la hora de crear el mapa, ya que parece que el SLAM funciona correctamente y lee los datos del laser bien. 
+Para resolver el problema de optimización utiliza un pluguin de Google llamado [Ceres](https://github.com/ceres-solver/ceres-solver).
 
 Este es el mapa que se ha generado tras pasear el Turtlebot por la sala:
 
@@ -21,6 +15,18 @@ Se utiliza el mando para controlar el robot utilizando el modo de velocidad norm
 Se ha tomado otra muestra, esta vez saliendo al pasillo de al lado del despacho:
 
 <img src="imgs/test_pasillo.png">
+
+
+## Error en la visualización del laser en RViz
+
+Parece que hay un problema en la visualización del lidar en rviz mientras se realiza el SLAM. Parece que no puede realizar la transformada entre el frame `map` y el frame `rplidar_link`:
+
+```
+[rviz2-1] [ERROR] [1683196573.628807857] [rviz2]: Lookup would require extrapolation into the future.  Requested time 1677796205,300857 but the latest data is at time 1677796205,209008, when looking up transform from frame [rplidar_link] to frame [map]
+```
+
+Esto no da problemas a la hora de crear el mapa, ya que parece que el SLAM funciona correctamente y lee los datos del laser bien. 
+
 
 
 
