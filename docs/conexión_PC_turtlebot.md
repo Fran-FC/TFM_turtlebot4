@@ -149,3 +149,13 @@ De esta forma el PC actuará como servidor NTP.
 ## ERROR DE SINCRONIZACIÓN
 
 El Create 3 tiene configurada la zona horaria en UTC, mientra que la zona horaria en Valencia es CEST (UTC +2), por lo que está 2 horas con retraso. De momento no se consigue configurar para que vaya correctamente.
+
+### SOLUCIÓN PROVISIONAL
+
+Como por el momento no se ha conseguido cambiar la zona horaria del Create 3 para que esté sincronizado con el PC y la Raspberry, lo que se propone es cambiar la zona horaria tanto en el PC como en la Raspberry a Greenwich Mean Time (GMT). De la siguiente manera:
+
+```Bash
+timedatectl set-timezone GMT
+```
+
+Esto es una solución provisional, ya que lo ideal es que estemos usando la hora correcta en todos los ordenadores, y no acoplarnos a la hora incorrecta.

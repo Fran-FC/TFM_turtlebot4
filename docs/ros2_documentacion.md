@@ -16,6 +16,13 @@ Este es el mapa que se ha generado tras pasear el Turtlebot por la sala:
 
 <img src="imgs/map_normal.png">
 
+Se utiliza el mando para controlar el robot utilizando el modo de velocidad normal (sin turbo) que por defecto está a 0.2 m/s en linear y a 0.5 rad/s. Mientras que el turbo funciona a 0.5 m/s y a 1.9 rad/s.
+
+Se ha tomado otra muestra, esta vez saliendo al pasillo de al lado del despacho:
+
+<img src="imgs/test_pasillo.png">
+
+
 
 ## Lectura de las velocidades y voltajes de las ruedas
 
