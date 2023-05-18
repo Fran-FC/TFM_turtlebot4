@@ -56,7 +56,39 @@ Una vez dentro seleccionar Wi-Fi Setup con la siguiente configuración:
 
 Despues guardar y aplicar cambios, se reiniciará y ya tendrá IP.
 
-### Configurar DNS y gateway para acceso a internet
+
+**A partir de este momento desconectaremos el cable ethernet de la RP y nos conectaremos a ella a traves de ssh por la interfaz wifi**
+
+
+## Configurar chrony en el PC
+
+En nuestro PC editar el archivo `/etc/chrony/chrony.conf` y añadir lo siguiente:
+
+```Bash
+# cnfig ntp sync with turtlebot
+server 10.42.0.21 presend 0 minpoll 0 maxpoll 0 iburst  prefer trust
+# enable serving time to ntp clients on 10.42.0.0 subnet
+allow 10.42.0.0/24
+# serve time even offline
+local stratum 10
+```
+
+Tendremos que abrir el puerto 123 en el protocolo UDP para aceptar peticiones NTP:
+
+```Bash
+sudo ufw allow from any to any port 123 proto udp
+```
+
+Y en la **Raspberry** editar `/etc/chrony/chrony.conf` y añadir: 
+
+```Bash
+server 10.42.0.1 iburst prefer
+```
+
+De esta forma el PC actuará como servidor NTP.
+
+
+## Configurar DNS y gateway para acceso a internet en la RP
 
 Para tener acceso a internet deberemos editar el archivo `/etc/netplan/50-wifis.yaml` para que tenga el siguiente aspecto:
 
@@ -80,7 +112,6 @@ network:
 ```
 
 Guardamos la configuración ejecutando `sudo netplan apply`. Con esto usaremos la dirección 10.42.0.1 como gateway de todo nuestro tráfico.
-
 
 Falta añadir los servidores DNS editando el fichero `/etc/resolv.conf` y añadiendo el PC como servidor DNS:
 
@@ -115,42 +146,19 @@ sudo systemctl restart systemd-resolved.service
 
 Al usar ROS2 Humble es recomendable activar el discovery-server para que solamente se conecte la Raspberry al AP, y que el Create 3 actúe como un cliente local. De esta manera nos ahorramos problemas con el multicasting. 
 
+<img src="imgs/discovery.png">
+
 Para activar el Discovery-Server se siguen las instrucciones del [manual de usuario](https://turtlebot.github.io/turtlebot4-user-manual/setup/discovery_server.html).
 
 Al final de todos los pasos deberemos poder ver todos los topics de la raspberry y del Create 3 desde el PC.
 
-## Configurar chrony en el PC
 
-Editar el archivo `/etc/chrony/chrony.conf` y añadir lo siguiente:
-
-```Bash
-# cnfig ntp sync with turtlebot
-server 10.42.0.21 presend 0 minpoll 0 maxpoll 0 iburst  prefer trust
-# enable serving time to ntp clients on 10.42.0.0 subnet
-allow 10.42.0.0/24
-# serve time even offline
-local stratum 10
-```
-
-Tendremos que abrir el puerto 123 en el protocolo UDP para aceptar peticiones NTP:
-
-```Bash
-sudo ufw allow from any to any port 123 proto udp
-```
-
-Y en la Raspberry editar `/etc/chrony/chrony.conf` y añadir: 
-
-```Bash
-server 10.42.0.1 iburst prefer
-```
-
-De esta forma el PC actuará como servidor NTP.
-
-## ERROR DE SINCRONIZACIÓN
+## ERRORES 
+### ERROR DE SINCRONIZACIÓN
 
 El Create 3 tiene configurada la zona horaria en UTC, mientra que la zona horaria en Valencia es CEST (UTC +2), por lo que está 2 horas con retraso. De momento no se consigue configurar para que vaya correctamente.
 
-### SOLUCIÓN PROVISIONAL
+#### SOLUCIÓN PROVISIONAL
 
 Como por el momento no se ha conseguido cambiar la zona horaria del Create 3 para que esté sincronizado con el PC y la Raspberry, lo que se propone es cambiar la zona horaria tanto en el PC como en la Raspberry a Greenwich Mean Time (GMT). De la siguiente manera:
 
