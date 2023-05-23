@@ -26,11 +26,12 @@ En la imagen se muestra el recorrido que hace el turtlebot para mapear parte de 
 
 Se hacen pruebas en tres escenarios diferentes:
 - **Escenario 1:** El PC ejecuta el SLAM, la raspberry comunica las lecturas de los sensores al PC vía WiFi. ***Inconveniente***: La señal WiFi Se degrada a medida que se aleja el robot.
+![Resultado SLAM PC](imgs/map_PC.png "Resultado SLAM PC")
 - **Escenario 2:** La Raspberry ejecuta el SLAM, el PC no interviene. ***Inconveniente***: Menos capacidad de procesamiento.
 - **Escenario 3:** Se utiliza un portatil para que ejecute el SLAM, apoyado en la base del turtlebot. ***Inconveniente***: Se añade un peso extra al robot y no es estable.
   
 
-![Alt text](imgs/map_PC.png "Caption or Footnote")
+
 
 ## Error en la visualización del laser en RViz
 
