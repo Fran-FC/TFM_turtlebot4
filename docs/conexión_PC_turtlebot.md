@@ -186,16 +186,10 @@ Aplicaremos los cambios completamente reiniciando la raspberry.
 ### Crear copia de seguridad del sistema 
 En el caso de que hayamos completado toda la configuración y funcione todo correctamente, se recomienda crear una imagen a modo de copia de seguridad.
 
-Conectados a la raspberry ejecutaremos el siguiente comando: 
+En el PC ejecutaremos el siguiente comando: 
 
 ```Bash
-sudo dd if=/dev/mmcblk0 | gzip -c > /home/ubuntu/backup_rp_img.img.gz
-```
-
-Para guardarnos la imagen en el PC la transferiremos vía scp, ejecutando el siguiente comando en nuestro PC:
-
-```Bash
-scp ubuntu@10.42.0.21:/home/ubuntu/backup_rp_img.img.gz .
+ssh ubuntu@10.42.0.21 'sudo dd if=/dev/mmcblk0 bs=4M' > ~/backup_rp_img.img
 ```
 
 Guardaremos la imagen para disponer de ella en un futuro si hiciera falta.
