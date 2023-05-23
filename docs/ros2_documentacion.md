@@ -35,9 +35,8 @@ El resultado no es el esperado, ya que cuando pierde la señal wifi deja de mape
 
 ![Resultado SLAM PC](imgs/map_PC.png "Resultado SLAM PC")
 
-<video src="vids/SLAM_PC.webm">
-    n
-</video>
+### Escenario 2
+![Resultado SLAM RP](imgs/map_RP.png "Resultado SLAM RP")
 
 ## Error en la visualización del laser en RViz
 
