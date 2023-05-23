@@ -59,6 +59,16 @@ Despues guardar y aplicar cambios, se reiniciará y ya tendrá IP.
 
 **A partir de este momento desconectaremos el cable ethernet de la RP y nos conectaremos a ella a traves de ssh por la interfaz wifi**
 
+## Activar Discovery-Server
+
+Al usar ROS2 Humble es recomendable activar el discovery-server para que solamente se conecte la Raspberry al AP, y que el Create 3 actúe como un cliente local. De esta manera nos ahorramos problemas con el multicasting. 
+
+<img src="imgs/discovery.png">
+
+Para activar el Discovery-Server se siguen las instrucciones del [manual de usuario](https://turtlebot.github.io/turtlebot4-user-manual/setup/discovery_server.html).
+
+Al final de todos los pasos deberemos poder ver todos los topics de la raspberry y del Create 3 desde el PC.
+
 
 ## Configurar chrony en el PC
 
@@ -127,10 +137,10 @@ Falta añadir los servidores DNS editando el fichero `/etc/resolv.conf` y añadi
 nameserver 10.42.0.1
 ```
 
-Si se han seguido los pasos en orden ahora podremos actualizar el sistema (nos tomará unos minutos) e instalaremos un paquete para poder aplicar la configuración del DNS de forma permanente:
+Ahora instalaremos un paquete para poder aplicar la configuración del DNS de forma permanente:
 
 ```Bash
-sudo apt update; sudo apt upgrade -y; sudo apt install resolvconf -y
+sudo apt update; sudo apt install resolvconf -y
 sudo systemctl enable resolvconf.service
 sudo systemctl start resolvconf.service
 ```
@@ -143,23 +153,52 @@ nameserver 10.42.0.1
 
 Reiniciamos y aplicamos los cambios: 
 
-```BAsh
+```Bash
 sudo resolvconf --enable-updates
 sudo resolvconf -u
 sudo systemctl restart resolvconf.service
 sudo systemctl restart systemd-resolved.service
 ```
 
-## Activar Discovery-Server
+Ahora podremos actualizar todo el sistema, taradará un buen rato, así que debemos tener paciencia:
 
-Al usar ROS2 Humble es recomendable activar el discovery-server para que solamente se conecte la Raspberry al AP, y que el Create 3 actúe como un cliente local. De esta manera nos ahorramos problemas con el multicasting. 
+```
+sudo apt upgrade -y;
+```
 
-<img src="imgs/discovery.png">
+## Configuración extra
 
-Para activar el Discovery-Server se siguen las instrucciones del [manual de usuario](https://turtlebot.github.io/turtlebot4-user-manual/setup/discovery_server.html).
+### Cambiar hostname y color prompt
+Para tener una distinción clara cuando se esté conectado a la raspberry se propone cambiar el color del bash prompt y el nombre del host.
 
-Al final de todos los pasos deberemos poder ver todos los topics de la raspberry y del Create 3 desde el PC.
+Primero editaremos el archivo `/etc/hostname` y cambiaremos el nombre por `raspberry`.
 
+Despues iremos al archivo `~/.bashrc` y descomentaremos la línea que dice `force_color_prompt=yes`. También en la linea que tiene el siguiente aspecto:
+
+```Bash
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+```
+
+Cambiaremos el color verde `[01;32m]` por el color rojo `[0;31m]` justo antes de donde pone `\u@\h`.
+
+Aplicaremos los cambios completamente reiniciando la raspberry.
+
+### Crear copia de seguridad del sistema 
+En el caso de que hayamos completado toda la configuración y funcione todo correctamente, se recomienda crear una imagen a modo de copia de seguridad.
+
+Conectados a la raspberry ejecutaremos el siguiente comando: 
+
+```Bash
+sudo dd if=/dev/mmcblk0 | gzip -c > /home/ubuntu/backup_rp_img.img.gz
+```
+
+Para guardarnos la imagen en el PC la transferiremos vía scp, ejecutando el siguiente comando en nuestro PC:
+
+```Bash
+scp ubuntu@10.42.0.21:/home/ubuntu/backup_rp_img.img.gz .
+```
+
+Guardaremos la imagen para disponer de ella en un futuro si hiciera falta.
 
 ## ERRORES 
 ### ERROR DE SINCRONIZACIÓN
