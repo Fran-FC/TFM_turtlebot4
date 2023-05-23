@@ -16,6 +16,21 @@ Se ha tomado otra muestra, esta vez saliendo al pasillo de al lado del despacho:
 
 <img src="imgs/test_pasillo.png">
 
+## Pruebas en diferentes dispositivos
+
+Primero se intenta hacer un mapa de la planta 2 del edificio 5C, partiendo de la sala multiusos. En este enlace se puede ver el [mapa](https://openmaps.upv.es/?locate=V.5C.2.040).
+
+<img src="imgs/planta2_openmaps.png">
+
+En la imagen se muestra el recorrido que hace el turtlebot para mapear parte de la planta.
+
+Se hacen pruebas en tres escenarios diferentes:
+- **Escenario 1:** El PC ejecuta el SLAM, la raspberry comunica las lecturas de los sensores al PC vía WiFi. ***Inconveniente***: La señal WiFi Se degrada a medida que se aleja el robot.
+- **Escenario 2:** La Raspberry ejecuta el SLAM, el PC no interviene. ***Inconveniente***: Menos capacidad de procesamiento.
+- **Escenario 3:** Se utiliza un portatil para que ejecute el SLAM, apoyado en la base del turtlebot. ***Inconveniente***: Se añade un peso extra al robot y no es estable.
+  
+
+![Alt text](imgs/map_PC.png "Caption or Footnote")
 
 ## Error en la visualización del laser en RViz
 
