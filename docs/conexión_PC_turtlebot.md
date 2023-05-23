@@ -48,7 +48,7 @@ Mediante conexión Ethernet, configurar el PC para que tenga IP estática:
 2. mask: 255.255.255.0
 3. gateway: 192.168.185.1
 
-Conectarse mediante ssh al turtlebot `turtlebot@192.168.185.3` (contraseña: turtlebot4) e introducir el comando para configurar la conexión wifi: `turtlebot4-setup`
+Conectarse mediante ssh al turtlebot `ubuntu@192.168.185.3` (contraseña: turtlebot4) e introducir el comando para configurar la conexión wifi: `turtlebot4-setup`
 
 Una vez dentro seleccionar Wi-Fi Setup con la siguiente configuración:
 
@@ -85,7 +85,9 @@ Y en la **Raspberry** editar `/etc/chrony/chrony.conf` y añadir:
 server 10.42.0.1 iburst prefer
 ```
 
-De esta forma el PC actuará como servidor NTP.
+Y reiniciar chrony `sudo systemctl restart chronyd`.
+
+De esta forma el PC actuará como servidor NTP. Antes de proseguir comprobaremos con el comando `date` que se muestra la misma fecha y hora que en el PC. Puede que debamos reiniciar varias veces chronyd.
 
 
 ## Configurar DNS y gateway para acceso a internet en la RP
@@ -113,13 +115,19 @@ network:
 
 Guardamos la configuración ejecutando `sudo netplan apply`. Con esto usaremos la dirección 10.42.0.1 como gateway de todo nuestro tráfico.
 
+Comprobamos que tenemos acceso a internet:
+
+```
+ping 8.8.8.8
+```
+
 Falta añadir los servidores DNS editando el fichero `/etc/resolv.conf` y añadiendo el PC como servidor DNS:
 
 ```Bash
 nameserver 10.42.0.1
 ```
 
-Ahora actualizaremos el sistema e instalaremos un paquete para poder aplicar la configuración del DNS de forma permanente:
+Si se han seguido los pasos en orden ahora podremos actualizar el sistema (nos tomará unos minutos) e instalaremos un paquete para poder aplicar la configuración del DNS de forma permanente:
 
 ```Bash
 sudo apt update; sudo apt upgrade -y; sudo apt install resolvconf -y
