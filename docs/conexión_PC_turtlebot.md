@@ -97,7 +97,7 @@ server 10.42.0.1 iburst prefer
 
 Y reiniciar chrony `sudo systemctl restart chronyd`.
 
-De esta forma el PC actuará como servidor NTP. Antes de proseguir comprobaremos con el comando `date` que se muestra la misma fecha y hora que en el PC. Puede que debamos reiniciar varias veces chronyd.
+De esta forma el PC actuará como servidor NTP. Antes de proseguir comprobaremos con el comando `date` que se muestra la misma fecha y hora que en el PC. Puede que debamos ejecutar varias veces el comando `date`.
 
 
 ## Configurar DNS y gateway para acceso a internet en la RP
