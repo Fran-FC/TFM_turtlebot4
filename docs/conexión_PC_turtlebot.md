@@ -37,7 +37,8 @@ Guardar la regla de manera persistente:
 
 ```Bash
 sudo apt install iptables-persistent
-sudo iptables-save > /etc/iptables/rules.v4
+sudo su
+iptables-save > /etc/iptables/rules.v4
 ```
 
 ## Conexión turtlebot al AP
