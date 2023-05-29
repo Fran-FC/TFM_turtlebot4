@@ -36,8 +36,8 @@ sudo iptables -t nat -s 10.42.0.0/24 -A POSTROUTING -j MASQUERADE
 Guardar la regla de manera persistente:
 
 ```Bash
-sudo apt install iptables-persistent
 sudo su
+apt install iptables-persistent
 iptables-save > /etc/iptables/rules.v4
 ```
 
