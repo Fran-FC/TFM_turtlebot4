@@ -183,6 +183,12 @@ Cambiaremos el color verde `[01;32m]` por el color rojo `[0;31m]` justo antes de
 
 Aplicaremos los cambios completamente reiniciando la raspberry.
 
+### Deshabilitar el nodo DIAGNOSTICS
+
+Para que el lidar no esté girando en todo momento, y solo cuando hay un nodo suscrito a su topic `/scan` se recomienda deshabilitar el nodo turtlebot_diganostics siempre y cuando no vayamos a necesitarlo.
+
+Para ello editaremos el archivo `/etc/turtlebot4/setup.bash` y cambiaremos la variable de entorno `TURTLEBOT4_DIAGNOSTICS` a 0.
+
 ### Crear copia de seguridad del sistema 
 En el caso de que hayamos completado toda la configuración y funcione todo correctamente, se recomienda crear una imagen a modo de copia de seguridad.
 
