@@ -38,6 +38,9 @@ El resultado no es el esperado, ya que cuando pierde la señal wifi deja de mape
 ### Escenario 2
 ![Resultado SLAM RP](imgs/map_RP.png "Resultado SLAM RP")
 
+### Escenario 3
+![Resultado SLAM LAPTOP](imgs/map_LAPTOP.png "Resultado SLAM LAPTOP")
+
 ## Error en la visualización del laser en RViz
 
 Parece que hay un problema en la visualización del lidar en rviz mientras se realiza el SLAM. Parece que no puede realizar la transformada entre el frame `map` y el frame `rplidar_link`:

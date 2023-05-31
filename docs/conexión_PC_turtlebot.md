@@ -18,12 +18,19 @@ sudo reboot
 
 Comprobar que aparece el nuevo adaptador con `ip a`
 
-Activar modo AP en el adaptador WIFI:
-1. Configuración de wifi
-2. ⋮ Activar punto de acceso inalámbrico...
-3. Activar
-4. SSID: turtlebot4PC
-5. Contraseña: 12345678
+### Activar AP Hotspot 
+Activar modo AP en el adaptador WiFi:
+```Bash
+nmcli d wifi hotspot ifname wlx30de4be0df50 ssid turtlebot4PC band a password 12345678 channel 44
+```
+
+### Diagnóstico de erorres del adaptador wifi
+
+Para ver todos los mensajes relacionados con el adaptador wifi es recomendable usar el comando:
+```
+journalctl  -f -u wpa_supplicant -u NetworkManager -u systemd-networkd
+```
+Y así depuraremos los errores con más facilidad.
 
 ### Habilitar redireccionamiento NAT
 
