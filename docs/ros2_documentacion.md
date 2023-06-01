@@ -1,6 +1,6 @@
 # Documentación de cada tarea relacionada con ROS2
 
-## SLAM por defecto (slam_toolbox)
+## slam_toolbox
 
 Se ha utilizado el paquete SLAM por defecto: [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox), el cual utiliza SLAM basado en un  [problema de optimización de posición en grafos](https://github.com/ceres-solver/ceres-solver/blob/master/examples/slam/pose_graph_2d/README.md) o en inglés *pose graph optimization problem*.
 
@@ -41,6 +41,11 @@ El resultado no es el esperado, ya que cuando pierde la señal wifi deja de mape
 ### Escenario 3
 ![Resultado SLAM LAPTOP](imgs/map_LAPTOP.png "Resultado SLAM LAPTOP")
 
+
+## Habilitar Stereo Depth 
+
+Para utilizar visual SLAM la cámara deberá publicar la imágen de profundidad. Se consigue modificando el archivo de configuración `/opt/ros/humble/share/turtlebot4_bringup/config/oakd_pro.yaml`, el contendio de este archivo de configuración se encuentra en el siguiente [enlace](../config/oakd/oakd_pro.yaml).
+
 ## Error en la visualización del laser en RViz
 
 Parece que hay un problema en la visualización del lidar en rviz mientras se realiza el SLAM. Parece que no puede realizar la transformada entre el frame `map` y el frame `rplidar_link`:
@@ -50,9 +55,6 @@ Parece que hay un problema en la visualización del lidar en rviz mientras se re
 ```
 
 Esto no da problemas a la hora de crear el mapa, ya que parece que el SLAM funciona correctamente y lee los datos del laser bien. 
-
-
-
 
 ## Lectura de las velocidades y voltajes de las ruedas
 

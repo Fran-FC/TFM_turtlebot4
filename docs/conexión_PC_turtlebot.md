@@ -18,6 +18,14 @@ sudo reboot
 
 Comprobar que aparece el nuevo adaptador con `ip a`
 
+Si tras hacer el paso anterior y después de actualizar deja de detectarse el adaptador, tendremos que ejecutar los siguientes comandos:
+```
+cd RTL88x2BU-Linux-Driver
+sudo make install
+sudo modprobe 88x2bu
+```
+Y debería volver a aparecer el adaptador en `ip a`.
+
 ### Activar AP Hotspot 
 Activar modo AP en el adaptador WiFi:
 ```Bash
