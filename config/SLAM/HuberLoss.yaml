@@ -14,6 +14,7 @@ slam_toolbox:
     map_frame: map
     base_frame: base_link
     scan_topic: scan
+    odom_topic: odom
     mode: mapping
 
     debug_logging: true
@@ -28,8 +29,8 @@ slam_toolbox:
     minimum_time_interval: 0.25
     transform_timeout: 0.2
     tf_buffer_duration: 30.
-    stack_size_to_use: 40000000 #// program needs a larger stack size to serialize large maps
-    # stack_size_to_use: 80000000 #// program needs a larger stack size to serialize large maps
+      #stack_size_to_use: 40000000 #// program needs a larger stack size to serialize large maps
+    stack_size_to_use: 80000000 #// program needs a larger stack size to serialize large maps
     enable_interactive_mode: false
 
     position_covariance_scale: 1.5
