@@ -7,6 +7,9 @@
 
 ## Algoritmos testeados
 ### SLAM 2D
+
+![comparacion_slam](https://github.com/Fran-FC/TFM_turtlebot4/assets/72190914/b5a3958b-11cc-4957-a29b-06551ec91b49)
+
 - [x] Cartographer
 - [x] HectorSLAM
 - [x] gmapping
