@@ -16,19 +16,17 @@
 |SLAM 2D| [slam_gmapping](https://github.com/Project-MANAS/slam_gmapping) | ROS2 Humble |✅|❌|
 |SLAM 2D| [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox) | ROS2 Humble |✅|✅|
 |SLAM 2D| [TinySLAM](https://github.com/OSLL/tiny-slam-ros-cpp) | ROS Kinetic  |❌|❌|
-|VISUAL SLAM - monocular| ORB-SLAM | ROS Indigo  |❌|❌|
-|VISUAL SLAM - monocular, rgbd, stereo| ORB-SLAM2 | ROS2 Foxy |❌|❌|
-|VISUAL SLAM - monocular, rgbd, stereo, stereo-inertial| ORB-SLAM3 | ROS2 Foxy |❌|❌|
-|VISUAL 2D SLAM| RTAB-Map | ROS2 Humble  |❌|✅|
-|VISUAL SLAM - monocular, stereo, stereo-inertial| VINS-Fusion | ROS2 Humble  |❌|✅|
+|VISUAL SLAM - monocular| [ORB-SLAM](https://github.com/OpenSLAM-org/openslam_orbslam) | ROS Indigo  |❌|❌|
+|VISUAL SLAM - monocular, rgbd, stereo| [ORB-SLAM2](https://github.com/appliedAI-Initiative/orb_slam_2_ros/tree/ros2) | ROS2 ??? |❌|❌|
+|VISUAL SLAM - monocular, rgbd, stereo, stereo-inertial| [ORB-SLAM3](https://github.com/zang09/ORB_SLAM3_ROS2/tree/humble) | ROS2 Humble |❌|❌|
+|VISUAL 2D SLAM| [RTAB-Map](https://github.com/introlab/rtabmap_ros/tree/ros2#rtabmap_ros) | ROS2 Humble  |❌|✅|
+|VISUAL SLAM - monocular, stereo, stereo-inertial| [VINS-Fusion](https://github.com/zinuok/VINS-Fusion-ROS2) | ROS2 Humble  |❌|✅|
 
 </div>
 
 ## SLAM 2D
 
 ![comparacion_slam](https://github.com/Fran-FC/TFM_turtlebot4/assets/72190914/b5a3958b-11cc-4957-a29b-06551ec91b49)
-
-
 
 ## Resumen
 El siguiente trabajo de fin de máster tiene como objetivo la puesta en marcha de un Turtlebot 4 y el posterior análisis de diferentes algoritmos SLAM. El robot Turtlebot 4, de la empresa canadiense Clearpath Robotics, es una expansión del Create 3 de iRobot, una empresa estadounidense. Utilizará ROS 2 en su última distribución, Humble. Esta nueva versión de ROS, pese a tener un periodo muy corto de vida y no tener tantas librerías desarrolladas como ROS 1, supone un gran avance en muchos aspectos respecto a la primera versión. Utilizando estas últimas tecnologías se realizará un estudio de varios algoritmos de localización y mapeo simultáneos (SLAM) con la intención de ver cual es es más eficiente y adecuado para este robot. Para ello se obtendrá el modelo cinemático diferencial del Turtlebot y así obtener un mayor ajuste de los algoritmos. También se pretende tener un control más “fino”, controlando cada rueda por separado, en lugar de mandar comandos de velocidad linear o angular del robot. Con las mediciones realizadas se concluirán cuales son los algoritmos y la configuración más óptima para el Turtlebot 4. Se pondrán en práctica muchos conocimientos adquiridos en las asignaturas de Automatización y Robótica, así como conceptos y conocimientos de las asignaturas de Sistemas Inteligentes, Sistemas y Aplicaciones Distribuidas, Configuración y Optimización de Sistemas de Cómputo y finalmente Redes y Seguridad. 
