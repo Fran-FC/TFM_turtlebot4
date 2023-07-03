@@ -66,3 +66,5 @@ Finalmente tenemos los 4 puntos calculados:
 Representamos los segmentos en [Geogebra](https://www.geogebra.org):
 
 ![Trayectoria real](imgs/trayectoria.png "Trayectoria real")
+
+Observamos que los valores calculados son aproximados, pero lo suficientemente precisos como para tomarlos como referencia.
