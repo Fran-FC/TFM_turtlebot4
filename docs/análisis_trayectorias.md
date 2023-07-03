@@ -49,4 +49,9 @@ realiza siguiendo el eje X, por lo que será B=(2.38,0), podremos calcular las c
 Para calcular las coordenadas de C usaremos la fórmula *x = xB + d * cos(θ)*  y *y = yB + d * sen(θ),* donde (xB, yB) son las coordenadas del punto B,
 d es la distancia entre los puntos B y C y θ es el ángulo que forman las rectas AB y BC con respecto al eje x. En este caso, tenemos que θ = 101.5°.
 
+Esto nos da las coordenadas C=(2.67, 143).
+
+De la misma manera calculamos D teniendo como referencia (xC, yC), el resultado es D=(-1.11, 0.8).
+
+
 
