@@ -54,4 +54,15 @@ Esto nos da las coordenadas C=(2.67, 143).
 De la misma manera calculamos D teniendo como referencia (xC, yC), el resultado es D=(-1.11, 0.8).
 
 
+## Representación gráfica de la trayectoria
 
+Finalmente tenemos los 4 puntos calculados:
+
+- A=(0,0)
+- B=(2.38,0)
+- C=(2.67, 143)
+- D=(-1.11, 0.8)
+  
+Representamos los segmentos en [Geogebra](https://www.geogebra.org):
+
+![Trayectoria real](imgs/trayectoria.png "Trayectoria real")
