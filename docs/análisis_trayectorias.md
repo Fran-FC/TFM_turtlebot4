@@ -3,9 +3,10 @@
 ## Conducción del robot 
 Se conduce el robot en un espacio no muy extenso en lineas rectas y giros en 4 puntos del espacio. Cuando se va a girar primero se marca en el suelo la posición del robot. Luego se miden las distancias entre los cuatro puntos, el inicial, dos giros y el final.
 
-Tras conducir el robot queda la trayectoria siguiente:
+Tras conducir el robot queda la trayectoria siguiente (representación no exacta de la trayectoria realizada):
 
 ![Foto trayectoria](imgs/foto_trayectoria.png "Foto trayectoria")
+
 
 ## Medición de los segmentos
 Se conduce el robot formando una trayectoria compuesta por 4 puntos, en cada punto se gira el robot y se conduce en línea recta hasta el siguiente punto. 
