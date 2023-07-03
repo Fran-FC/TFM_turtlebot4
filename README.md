@@ -5,6 +5,10 @@
 - [Documentación ROS2](docs/ros2_documentacion.md)
 - [Documentación SLAM](docs/SLAM_documentacion.md)
 
+## Resultados
+
+- [Análisis de trayectorias](docs/análisis_trayectorias.md)
+
 ## Algoritmos testeados
 
 <div align="center">
