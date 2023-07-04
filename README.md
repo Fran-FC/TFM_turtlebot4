@@ -13,13 +13,13 @@
 
 <div align="center">
   
-|Tipo SLAM|Algoritmo|Version de ROS|Probado|Activo|
-|:---:|:---:|:---:|:---:|:---:|
-|SLAM 2D| [Cartographer](https://github.com/ros2/cartographer_ros) | ROS2 Humble |✅|✅|
-|SLAM 2D| [HectorSLAM](https://github.com/RRL-ALeRT/hector_slam_ros2) | ROS2 Humble |✅|✅|
-|SLAM 2D| [slam_gmapping](https://github.com/Project-MANAS/slam_gmapping) | ROS2 Humble |✅|❌|
-|SLAM 2D| [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox) | ROS2 Humble |✅|✅|
-|SLAM 2D| [TinySLAM](https://github.com/OSLL/tiny-slam-ros-cpp) | ROS Kinetic  |❌|❌|
+|Tipo SLAM|Algoritmo|Version de ROS|Probado|Activo|Formato Pose|
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|SLAM 2D| [Cartographer](https://github.com/ros2/cartographer_ros) | ROS2 Humble |✅|✅|[visualization_msgs/msg/MarkerArray](https://docs.ros.org/en/noetic/api/visualization_msgs/html/msg/MarkerArray.html)|
+|SLAM 2D| [HectorSLAM](https://github.com/RRL-ALeRT/hector_slam_ros2) | ROS2 Humble |✅|✅|[geometry_msgs/msg/PoseStamped](https://docs.ros.org/en/lunar/api/geometry_msgs/html/msg/PoseStamped.html)
+|SLAM 2D| [slam_gmapping](https://github.com/Project-MANAS/slam_gmapping) | ROS2 Humble |✅|❌|----|
+|SLAM 2D| [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox) | ROS2 Humble |✅|✅|[geometry_msgs/msg/PoseWithCovarianceStamped](https://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/PoseWithCovarianceStamped.html)
+|SLAM 2D| [TinySLAM](https://github.com/OSLL/tiny-slam-ros-cpp) | ROS Kinetic  |❌|❌|----|
 |VISUAL SLAM - monocular| [ORB-SLAM](https://github.com/OpenSLAM-org/openslam_orbslam) | ROS Indigo  |❌|❌|
 |VISUAL SLAM - monocular, rgbd, stereo| [ORB-SLAM2](https://github.com/appliedAI-Initiative/orb_slam_2_ros/tree/ros2) | ROS2 ??? |❌|❌|
 |VISUAL SLAM - monocular, rgbd, stereo, stereo-inertial| [ORB-SLAM3](https://github.com/zang09/ORB_SLAM3_ROS2/tree/humble) | ROS2 Humble |❌|❌|
