@@ -8,7 +8,8 @@
 ## Resultados
 
 - [Análisis de trayectorias](docs/análisis_trayectorias.md)
-
+- [Análisis de los mapas](docs/análisis_mapas.md)
+- 
 ## Algoritmos testeados
 
 <div align="center">
