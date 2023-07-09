@@ -1,2 +1,7 @@
 rosbag_left*
 rosbag_rgb*
+scripts/map_benchmark/cartographer
+scripts/map_benchmark/slam_toolbox
+scripts/map_benchmark/hector
+scripts/map_benchmark/gmapping
+.vscode
