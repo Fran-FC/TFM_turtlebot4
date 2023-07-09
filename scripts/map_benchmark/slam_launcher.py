@@ -12,7 +12,6 @@ parser.add_argument("--bag_rate", default= 1, help="Bag play speed rate")
 parser.add_argument("--it", default=10, help="Num of iterations per slam algorithm")
 args = parser.parse_args()
 
-mem_cpu_data = []
 mem_cpu_data_columns = ["Algorithm", "Iteration", "Timestamp", "CPU%", "Mem%"]
 mem_cpu_csv = "mem_cpu_usage.csv"
 
@@ -32,14 +31,16 @@ bag_duration = float(os.popen("ros2 bag info %s"%args.bag_file).read().\
 play_duration = bag_duration/float(args.bag_rate)
 
 def measure_mem_cpu(algorithm, iteration):
+    mem_cpu_data = []
     timer = 0
     ini = time.time()
     while timer < play_duration:
+        timer = time.time() - ini
+
         cpu_usage = psutil.cpu_percent() 
         memory_usage = psutil.virtual_memory().percent
         mem_cpu_data.append([algorithm, iteration, int(timer), cpu_usage, memory_usage])
 
-        timer = time.time() - ini
         time.sleep(play_duration/20)
     
     df = pd.DataFrame(mem_cpu_data, columns=mem_cpu_data_columns)
@@ -73,8 +74,6 @@ for slam_command in slam_algo_dict.keys():
             print("Waiting to finish bag...")
             time.sleep(0.5)
 
-        th.join()
-
         print("Saving map")
 
         map_dir = "scripts/map_benchmark/"+slam_algo_dict[slam_command]+"/"
@@ -91,9 +90,8 @@ for slam_command in slam_algo_dict.keys():
             time.sleep(0.1)
         
         print("Terminating all processes")
-
+        th.join()
         slam_process.terminate()
-
         os.system("ps aux | grep %s |  awk 'NR>1{print prev} {prev=$2}' | xargs -I {} kill {}" % slam_algo_dict[slam_command])
 #        os.system("ps aux | grep %s |  awk 'NR>1{print prev} {prev=$2}' | xargs -I {} kill {}" % "robot_state_publisher")
 
