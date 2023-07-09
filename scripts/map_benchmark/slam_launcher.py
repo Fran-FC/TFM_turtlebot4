@@ -35,12 +35,12 @@ def measure_mem_cpu(algorithm, iteration):
     timer = 0
     ini = time.time()
     while timer < play_duration:
-        cpu_usage = [psutil.cpu_percent() for _ in range(3)]
+        cpu_usage = psutil.cpu_percent() 
         memory_usage = psutil.virtual_memory().percent
-        mem_cpu_data.append([algorithm, iteration, timer, cpu_usage, memory_usage])
+        mem_cpu_data.append([algorithm, iteration, int(timer), cpu_usage, memory_usage])
 
         timer = time.time() - ini
-        time.sleep(2)
+        time.sleep(play_duration/20)
     
     df = pd.DataFrame(mem_cpu_data, columns=mem_cpu_data_columns)
 
