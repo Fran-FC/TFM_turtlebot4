@@ -10,10 +10,11 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--bag_file", default= "bag/rosbag_imu/rosbag2_2023_06_14-12_21_15_0.db3",help="path to bag file")
 parser.add_argument("--bag_rate", default= 1, help="Bag play speed rate")
 parser.add_argument("--it", default=10, help="Num of iterations per slam algorithm")
+parser.add_argument("--output_csv", default="mem_cpu_usage.csv", help="Output of cpu and mem usage stats")
 args = parser.parse_args()
 
 mem_cpu_data_columns = ["Algorithm", "Iteration", "Timestamp", "CPU%", "Mem%"]
-mem_cpu_csv = "mem_cpu_usage.csv"
+mem_cpu_csv = args.output_csv
 
 slam_algo_dict = {
     "ros2 run hector_mapping hector_mapping_node" : "hector",
@@ -93,6 +94,6 @@ for slam_command in slam_algo_dict.keys():
         th.join()
         slam_process.terminate()
         os.system("ps aux | grep %s |  awk 'NR>1{print prev} {prev=$2}' | xargs -I {} kill {}" % slam_algo_dict[slam_command])
-#        os.system("ps aux | grep %s |  awk 'NR>1{print prev} {prev=$2}' | xargs -I {} kill {}" % "robot_state_publisher")
+        os.system("ps aux | grep %s |  awk 'NR>1{print prev} {prev=$2}' | xargs -I {} kill {}" % "robot_state_publisher")
 
         print("All processes terminated")
