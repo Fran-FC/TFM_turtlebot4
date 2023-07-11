@@ -13,21 +13,29 @@ occupied_value = 0
 free_value = 254
 unknown_value = 205
 
-def plot_mem_cpu_usage(df):
-    return
-
 def get_occupied_proportion(image):
     image = image.astype(float)
-    image[image == unknown_value] = np.nan
-    img_size = np.count_nonzero(~np.isnan(image))
-    occupied_proportion = np.sum(image == occupied_value) / img_size
+    
+    occupied_proportion = np.sum(image == occupied_value) / image.size
     return occupied_proportion
 
 def get_num_corners(image):
-    return 0
+    _, binary_image = cv.threshold(image, unknown_value, free_value, cv.THRESH_BINARY)#remove unknown values
+    image = np.float32(binary_image)
+    # Apply corner detection
+    dst = cv.cornerHarris(image, blockSize=3, ksize=3, k=0.04)
+
+    # Threshold the corner response
+    threshold = 0.01 * dst.max()
+    corners = np.where(dst > threshold)
+
+    return len(corners[0])
 
 def get_num_enclosed_areas(image):
-    return 0
+    _, binary_image = cv.threshold(image, unknown_value, free_value, cv.THRESH_BINARY)#remove unknown values
+    num_labels, _ = cv.connectedComponents(binary_image)
+
+    return num_labels - 1
 
 def get_map_metrics(slam_algorithms):
     algo_map_root_dir = "scripts/map_benchmark/"
