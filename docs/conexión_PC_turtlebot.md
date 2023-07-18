@@ -228,4 +228,5 @@ Como por el momento no se ha conseguido cambiar la zona horaria del Create 3 par
 timedatectl set-timezone GMT
 ```
 
-Esto es una solución provisional, ya que lo ideal es que estemos usando la hora correcta en todos los ordenadores, y no acoplarnos a la hora incorrecta.
+Esto es una solución provisional, ya que lo ideal es que estemos usando la hora correcta en todos los ordenadores, y no acoplarnos a la hora incorrecta. 
+Pese a esto, no soluciona los mensajes de error y el problema de sincronización sigue presente.
