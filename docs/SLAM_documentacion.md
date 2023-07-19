@@ -67,7 +67,8 @@ Se ha probado el clásico algoritmo gmapping:
 
 ## cartographer
 
-<img src="imgs/map_cartographer.png">
+<img src="imgs/map_cartographer_imu.png">
+<img src="imgs/map_cartographer_no_imu.png">
 
 # Visual SLAM
 ## rtabmap

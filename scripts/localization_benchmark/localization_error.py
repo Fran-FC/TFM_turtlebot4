@@ -62,7 +62,7 @@ def get_nearest_point(target_point, point_list):
     return nearest_point
 
 
-csv_file_points = "trans_cartographer.csv"
+csv_file_points = "trans_rtabmap.csv"
 real_points = [(0,0), (2.38,0), (2.67, 1.43), (-1.11, 0.8)]
 
 theo_points = pd.read_csv(csv_file_points, sep=" ")
@@ -71,6 +71,7 @@ x = theo_points['x']
 y = theo_points['y']
 
 acum_err = 0
+max_err = 0
 # Convertir los datos a un arreglo NumPy
 theo_points = np.column_stack((x, y))
 
@@ -86,12 +87,16 @@ for i in range(len(real_points)):
     # num_sub_divisions = 
     r_between = get_points_between(r_0, r_1, count_points_between(t_0, t_1, theo_points))
     
-    acum_err = acum_err + euclidean_distance(t_0, r_0) 
-    acum_err = acum_err + euclidean_distance(t_1, r_1) 
+    acum_err += euclidean_distance(t_0, r_0) 
+    acum_err += euclidean_distance(t_1, r_1) 
 
     start, end = get_start_end_index(t_0, t_1, theo_points) 
     for r, i in zip(r_between, range(len(r_between))):
-        acum_err = acum_err + euclidean_distance(r, theo_points[start+i+1])
+        local_err = euclidean_distance(r, theo_points[start+i+1])
+        acum_err += local_err
+        if max_err < local_err:
+            max_err = local_err
 
-acum_err = acum_err / len(theo_points)
-print(acum_err)
+average_error = acum_err / len(theo_points)
+print("average error %f" % average_error)
+print("max error %f" % max_err)

@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import math
 
-def rotate_y_axis(points, angulo, axis):
+def rotate_by_axis(points, angulo, axis):
     # Convertir el ángulo a radianes
     angulo = np.radians(angulo)
     if axis == 'x':
@@ -48,50 +49,71 @@ def save_points_to_csv(xs,ys,file_name):
     data = np.column_stack((xs, ys))
     np.savetxt("trans_"+file_name, data, delimiter=' ', header='x y', comments='')
 
-# Leer el archivo CSV
-file_name = 'cartographer.csv'
-data = pd.read_csv(file_name, sep=" ")
+def calc_slope(p1, p2):
+    dx = p2[0] - p1[0]
+    dy = p2[1] - p1[1]
+    if dx == 0:
+        return float('inf')  # Pendiente infinita (recta vertical)
+    return dy / dx
 
-# Extraer las columnas 'x' y 'y' del DataFrame
-x = data['x'].to_numpy()
-y = data['y'].to_numpy()
-z = np.zeros(y.size)
+def get_angle_between_vectors(punto1_r1, punto2_r1, punto1_r2, punto2_r2):
+    pendiente_r1 = calc_slope(punto1_r1, punto2_r1)
+    pendiente_r2 = calc_slope(punto1_r2, punto2_r2)
 
-# Convertir los datos a un arreglo NumPy
-points = np.column_stack((x, y, z))
+    # Calcular el ángulo entre las pendientes utilizando la fórmula del ángulo entre dos líneas
+    angulo_radianes = abs(math.atan((pendiente_r2 - pendiente_r1) / (1 + pendiente_r1 * pendiente_r2)))
+    angulo_grados = math.degrees(angulo_radianes)
 
-# transform the points
-# points = rotate_y_axis(points, 80, 'z')
-points = rotate_y_axis(points, 180, 'x')
-d = calculate_translation_distance(points[0], (0,0,0))
-points = translate_points(points, d)
+    return angulo_grados
 
-# Extraer las coordenadas x y y después de la rotación
-rotated_x = points[:, 0]
-rotated_y = points[:, 1]
+if __name__=="__main__":
+    # Leer el archivo CSV
+    file_name = 'rtabmap.csv'
 
-save_points_to_csv(rotated_x, rotated_y, file_name)
+    transform_t1_algos = ["slam_toolbox.csv", "gmapping.csv", "rtabmap.csv"]
+    transform_t2_algos = ["hector.csv", "cartographer.csv"]
 
-# Crear el gráfico
-fig, ax = plt.subplots()
+    data = pd.read_csv(file_name, sep=" ")
 
-# for i in range(len(points) - 1):
-#     ax.plot([rotated_x[i], rotated_x[i + 1]], [rotated_y[i], rotated_y[i + 1]], c='red')
+    # real trajectory
+    rt = [(0,0), (2.38,0), (2.67, 1.43), (-1.11, 0.8)]
 
-# Graficar los puntos rotados
-ax.scatter(rotated_x, rotated_y, color='red', label='Puntos Rotados')
+    # Extraer las columnas 'x' y 'y' del DataFrame
+    x = data['x'].to_numpy()
+    y = data['y'].to_numpy()
+    z = np.zeros(y.size)
 
-ax.scatter(x, y, color='blue', label='Puntos')
+    # Convertir los datos a un arreglo NumPy
+    points = np.column_stack((x, y, z))
 
-# Etiqueta de los ejes
-ax.set_xlabel('Eje X')
-ax.set_ylabel('Eje Y')
+    # transform the points
+    if file_name in transform_t1_algos:
+        points = rotate_by_axis(points, 180, 'y')
+        alpha = get_angle_between_vectors(rt[0], rt[1], rt[2], rt[3]) 
+        points = rotate_by_axis(points, alpha - 90, 'z')
+    elif file_name in transform_t2_algos:
+        points = rotate_by_axis(points, 180, 'x')
 
-# Título del gráfico
-ax.set_title('Puntos Rotados')
+    d = calculate_translation_distance(points[0], (0,0,0))
+    points = translate_points(points, d)
 
-# Agregar una leyenda
-ax.legend()
+    # Extraer las coordenadas x e y 
+    rotated_x = points[:, 0]
+    rotated_y = points[:, 1]
 
-# Mostrar el gráfico
-plt.show()
+    save_points_to_csv(rotated_x, rotated_y, file_name)
+
+    # Crear el gráfico
+    fig, ax = plt.subplots()
+
+    ax.scatter(rotated_x, rotated_y, color='red', label='trayectoria transformada')
+    ax.plot(rotated_x, rotated_y, color='red')
+
+    ax.scatter(x, y, color='blue', label='trayectoria original')
+    ax.plot(x, y, color='blue')
+
+    ax.set_xlabel('Eje X')
+    ax.set_ylabel('Eje Y')
+    ax.set_title('Puntos Rotados')
+    ax.legend()
+    plt.show()

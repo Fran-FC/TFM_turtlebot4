@@ -90,7 +90,6 @@ Representamos los segmentos en [Geogebra](https://www.geogebra.org):
 
 Observamos que los valores calculados son aproximados, pero lo suficientemente precisos como para tomarlos como referencia.
 
-
 # Obtención de las trayectorias calculadas
 
 Cada algoritmo obtiene una estimación de la localización del robot en base a diferentes entradas de los sensores. El problema es que cada uno muestra la posición tomando como referencia frames diferentes, a parte de esto tampoco son consistentes entre si en el formato de mensaje en el que se publica la posición en cada instante. 
@@ -111,3 +110,22 @@ Para estos casos especiales se han utilizado otros métodos para obtener las pos
 
 ## Transformación de los puntos a un sistema de coordenadas común
 
+
+
+# Resultado final
+
+
+
+<div align="center">
+
+|                   | Average error | Maximum error |
+| :--------:        | :--------: | :---------: | 
+| **cartographer**  |0.435842|0.806478|
+| **slam_toolbox**  |0.413419|1.560959|
+| **hector**        |0.696634|2.543998|
+| **gmapping**      |0.748777|7.604031|
+| **rtabmap**       |0.585274|1.745001|
+
+![Comparacion trayectorias](imgs/comparacion_trayectorias.svg "comparacion trayectorias")
+![Comparacion trayectorias no zoom](imgs/comparacion_trayectorias_nozoom.svg "comparacion trayectorias no zoom")
+</div>
