@@ -64,17 +64,20 @@ def get_map_metrics(slam_algorithms):
     fig, ax = plt.subplots()
     ax.boxplot(arr_occ_proportions)
     ax.set_xticklabels(slam_algorithms)
-    plt.savefig("occupacy_proportion.png")
+    ax.set_title("Proporción de píxeles ocupados")
+    plt.savefig("occupacy_proportion.svg")
     
     fig, ax = plt.subplots()
     ax.boxplot(arr_num_corners)
     ax.set_xticklabels(slam_algorithms)
-    plt.savefig("num_corners.png")
+    ax.set_title("Número de esquinas")
+    plt.savefig("num_corners.svg")
 
     fig, ax = plt.subplots()
     ax.boxplot(arr_encl_areas)
     ax.set_xticklabels(slam_algorithms)
-    plt.savefig("encl_areas.png")
+    ax.set_title("Número de áreas encerradas")
+    plt.savefig("encl_areas.svg")
 
     return
 
@@ -101,7 +104,7 @@ def get_perf_plot(df, metric):
         # Labels and title
         ax.set_xlabel('Timestamp')
         ax.set_ylabel(metric)
-        ax.set_title('Variability of %s over Time' % metric)
+        ax.set_title('Variability of %s over time' % metric)
 
         # Show the legend
         ax.legend()

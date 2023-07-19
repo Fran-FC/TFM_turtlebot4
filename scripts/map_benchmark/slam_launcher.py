@@ -17,13 +17,29 @@ mem_cpu_data_columns = ["Algorithm", "Iteration", "Timestamp", "CPU%", "Mem%"]
 mem_cpu_csv = args.output_csv
 
 slam_algo_dict = {
-    "ros2 run hector_mapping hector_mapping_node" : "hector",
-    "ros2 launch turtlebot4_navigation slam.launch.py" : "slam_toolbox",
-    "ros2 run slam_gmapping slam_gmapping" : "gmapping",
-    "ros2 launch cartographer_ros turtlebot4_online.launch.py" : "cartographer",
+    "ros2 run hector_mapping hector_mapping_node" : {
+        "name": "hector",
+        "occ_threshold": "0.696",
+        "free_threshold": "0.6",
+    },
+    "ros2 launch turtlebot4_navigation slam.launch.py" : {
+        "name": "slam_toolbox",
+        "occ_threshold": "0.987",
+        "free_threshold": "0.9",
+    },
+    "ros2 run slam_gmapping slam_gmapping" : {
+        "name": "gmapping",
+        "occ_threshold": "0.642",
+        "free_threshold": "0.6",
+    },
+    "ros2 launch cartographer_ros turtlebot4_online.launch.py" : {
+        "name": "cartographer",
+        "occ_threshold": "0.2243", 
+        "free_threshold": "0.22"
+    }
 }
 
-map_save_command = "ros2 run nav2_map_server map_saver_cli -f %s --occ 0.7 --free 0.3"
+map_save_command = "ros2 run nav2_map_server map_saver_cli -f %s --occ %s --free %s"
 
 # get the rosbag file original duration in seconds 
 bag_duration = float(os.popen("ros2 bag info %s"%args.bag_file).read().\
@@ -66,7 +82,7 @@ for slam_command in slam_algo_dict.keys():
         print("Sleeping for %d seconds" % play_duration)
 
         # start measuring cpu and mem usage in parallel 
-        th = threading.Thread(target=measure_mem_cpu, args=[slam_algo_dict[slam_command], i])
+        th = threading.Thread(target=measure_mem_cpu, args=[slam_algo_dict[slam_command]["name"], i])
         th.start()
 
         time.sleep(play_duration)
@@ -77,14 +93,18 @@ for slam_command in slam_algo_dict.keys():
 
         print("Saving map")
 
-        map_dir = "scripts/map_benchmark/"+slam_algo_dict[slam_command]+"/"
-        map_relative_path = map_dir+slam_algo_dict[slam_command]+"_"+str(i)
+        map_dir = "scripts/map_benchmark/"+slam_algo_dict[slam_command]["name"]+"/"
+        map_relative_path = map_dir+slam_algo_dict[slam_command]["name"]+"_"+str(i)
         try:
             os.listdir(map_dir)
         except:
             os.mkdir(map_dir)
 
-        map_save_process = Popen((map_save_command%map_relative_path).split())
+        map_command = map_save_command%(map_relative_path, 
+                                        slam_algo_dict[slam_command]["occ_threshold"], 
+                                        slam_algo_dict[slam_command]["free_threshold"])
+
+        map_save_process = Popen(map_command.split())
 
         while map_save_process.poll() == None:
             print("Waiting to save map...")
@@ -93,7 +113,7 @@ for slam_command in slam_algo_dict.keys():
         print("Terminating all processes")
         th.join()
         slam_process.terminate()
-        os.system("ps aux | grep %s |  awk 'NR>1{print prev} {prev=$2}' | xargs -I {} kill {}" % slam_algo_dict[slam_command])
+        os.system("ps aux | grep %s |  awk 'NR>1{print prev} {prev=$2}' | xargs -I {} kill {}" % slam_algo_dict[slam_command]["name"])
         os.system("ps aux | grep %s |  awk 'NR>1{print prev} {prev=$2}' | xargs -I {} kill {}" % "robot_state_publisher")
 
         print("All processes terminated")
