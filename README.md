@@ -9,7 +9,7 @@
 
 - [Análisis de trayectorias](docs/análisis_trayectorias.md)
 - [Análisis de los mapas](docs/análisis_mapas.md)
-- 
+  
 ## Algoritmos testeados
 
 <div align="center">
@@ -22,10 +22,10 @@
 |SLAM 2D| [slam_toolbox](https://github.com/SteveMacenski/slam_toolbox) | ROS2 Humble |✅|✅|[geometry_msgs/msg/PoseWithCovarianceStamped](https://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/PoseWithCovarianceStamped.html)
 |SLAM 2D| [TinySLAM](https://github.com/OSLL/tiny-slam-ros-cpp) | ROS Kinetic  |❌|❌|----|
 |VISUAL SLAM - monocular| [ORB-SLAM](https://github.com/OpenSLAM-org/openslam_orbslam) | ROS Indigo  |❌|❌|---|
-|VISUAL SLAM - monocular, rgbd, stereo| [ORB-SLAM2](https://github.com/appliedAI-Initiative/orb_slam_2_ros/tree/ros2) | ROS2 ??? |❌|❌|---|
+|VISUAL SLAM - monocular, rgbd, stereo| [ORB-SLAM2](https://github.com/appliedAI-Initiative/orb_slam_2_ros/tree/ros2) | ROS2 |❌|❌|---|
 |VISUAL SLAM - monocular, rgbd, stereo, stereo-inertial| [ORB-SLAM3](https://github.com/zang09/ORB_SLAM3_ROS2/tree/humble) | ROS2 Humble |❌|❌|---|
 |VISUAL 2D SLAM| [RTAB-Map](https://github.com/introlab/rtabmap_ros/tree/ros2#rtabmap_ros) | ROS2 Humble  |✅|✅|[geometry_msgs/msg/PoseWithCovarianceStamped](https://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/PoseWithCovarianceStamped.html)
-|VISUAL SLAM - monocular, stereo, stereo-inertial| [VINS-Fusion](https://github.com/zinuok/VINS-Fusion-ROS2) | ROS2 Humble  |✅|✅|[geometry_msgs/msg/PoseStamped](https://docs.ros.org/en/lunar/api/geometry_msgs/html/msg/PoseStamped.html)|
+|VISUAL SLAM - monocular, stereo, stereo-inertial| [VINS-Fusion](https://github.com/zinuok/VINS-Fusion-ROS2) | ROS2 Foxy  |❌|✅|[geometry_msgs/msg/PoseStamped](https://docs.ros.org/en/lunar/api/geometry_msgs/html/msg/PoseStamped.html)|
 
 </div>
 

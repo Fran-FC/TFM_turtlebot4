@@ -74,7 +74,7 @@ Se ha probado el clásico algoritmo gmapping:
 
 Se ejecuta con el siguiente comando y argumentos:
 ```
-ros2 launch rtabmap_launch rtabmap.launch.py     rtabmap_args:="--delete_db_on_start"     rgb_topic:=/oakd/rgb/image_raw     depth_topic:=/oakd/stereo/image_raw     camera_info_topic:=/oakd/rgb/camera_info     frame_id:=base_link     approx_sync:=true     wait_imu_to_init:=true     imu_topic:=/imu  visual_odometry:=false  odom_topic:=/odom     qos:=1     rviz:=true wait_imu_to_init:=false queue_size:=200 approx_sync_max_interval:=0.01
+ros2 launch rtabmap_launch rtabmap.launch.py     rtabmap_args:="--delete_db_on_start"     rgb_topic:=/oakd/rgb/image_raw     depth_topic:=/oakd/stereo/image_raw     camera_info_topic:=/oakd/right/camera_info     frame_id:=base_link     approx_sync:=true     wait_imu_to_init:=true     imu_topic:=/imu  visual_odometry:=false  odom_topic:=/odom     qos:=2     rviz:=true wait_imu_to_init:=false queue_size:=200 approx_sync_max_interval:=0.01
 ```
 
 
