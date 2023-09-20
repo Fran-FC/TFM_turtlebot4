@@ -106,14 +106,14 @@ if __name__=="__main__":
     # Crear el gráfico
     fig, ax = plt.subplots()
 
-    ax.scatter(rotated_x, rotated_y, color='red', label='trayectoria transformada')
+    ax.scatter(rotated_x, rotated_y, color='red', label='Trayectoria real')
     ax.plot(rotated_x, rotated_y, color='red')
 
-    ax.scatter(x, y, color='blue', label='trayectoria original')
+    ax.scatter(x, y, color='blue', label='Trayectoria calculada')
     ax.plot(x, y, color='blue')
 
     ax.set_xlabel('Eje X')
     ax.set_ylabel('Eje Y')
-    ax.set_title('Puntos Rotados')
+    ax.set_title('Comparación de trayectorias')
     ax.legend()
     plt.show()

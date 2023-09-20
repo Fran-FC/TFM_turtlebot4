@@ -17,21 +17,21 @@ mem_cpu_data_columns = ["Algorithm", "Iteration", "Timestamp", "CPU%", "Mem%"]
 mem_cpu_csv = args.output_csv
 
 slam_algo_dict = {
-    "ros2 run hector_mapping hector_mapping_node" : {
-        "name": "hector",
-        "occ_threshold": "0.696",
-        "free_threshold": "0.6",
-    },
-    "ros2 launch turtlebot4_navigation slam.launch.py" : {
-        "name": "slam_toolbox",
-        "occ_threshold": "0.987",
-        "free_threshold": "0.9",
-    },
-    "ros2 run slam_gmapping slam_gmapping" : {
-        "name": "gmapping",
-        "occ_threshold": "0.642",
-        "free_threshold": "0.6",
-    },
+    # "ros2 run hector_mapping hector_mapping_node" : {
+    #     "name": "hector",
+    #     "occ_threshold": "0.696",
+    #     "free_threshold": "0.6",
+    # },
+    # "ros2 launch turtlebot4_navigation slam.launch.py" : {
+    #     "name": "slam_toolbox",
+    #     "occ_threshold": "0.987",
+    #     "free_threshold": "0.9",
+    # },
+    # "ros2 run slam_gmapping slam_gmapping" : {
+    #     "name": "gmapping",
+    #     "occ_threshold": "0.642",
+    #     "free_threshold": "0.6",
+    # },
     "ros2 launch cartographer_ros turtlebot4_online.launch.py" : {
         "name": "cartographer",
         "occ_threshold": "0.2243", 

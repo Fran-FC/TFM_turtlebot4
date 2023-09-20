@@ -37,6 +37,49 @@ def get_num_enclosed_areas(image):
 
     return num_labels - 1
 
+def get_one_map_metrics():
+    map_root_dir = "scripts/map_benchmark/onemap"
+
+    pgm_files = glob.glob("%s/*pgm" % (map_root_dir))
+
+    arr_occ  = []
+    arr_corn = []
+    arr_encl = []
+    for i, pgm in enumerate(pgm_files):
+        image = cv.imread(pgm, -1)
+
+        arr_occ.append(get_occupied_proportion(image))
+        arr_corn.append(get_num_corners(image))
+        arr_encl.append(get_num_enclosed_areas(image))
+        
+        inicio = pgm.rfind("/")
+        fin = pgm.rfind(".")
+        if inicio != -1 and fin != -1 and inicio < fin:
+            pgm_files[i] = pgm[inicio + 1:fin]
+
+    plt.bar( pgm_files, arr_occ)  
+    plt.title('Proporción de píxeles ocupados')
+    plt.xlabel('Algoritmos')
+    plt.ylabel('Proporción')
+    plt.savefig("proporcion_pixeles.png")
+    plt.close()
+
+    plt.bar( pgm_files, arr_corn, color="green")  
+    plt.title('Número de esquinas')
+    plt.xlabel('Algoritmos')
+    plt.ylabel('Total')
+    plt.savefig("num_esquinas.png")
+    plt.close()
+
+    plt.bar( pgm_files, arr_encl, color="orange")  
+    plt.title('Número de áreas encerradas')
+    plt.xlabel('Algoritmos')
+    plt.ylabel('Total')
+    plt.savefig("num_areas_encerradas.png")
+    plt.close()
+
+
+
 def get_map_metrics(slam_algorithms):
     algo_map_root_dir = "scripts/map_benchmark/"
 
@@ -115,8 +158,9 @@ def get_perf_plot(df, metric):
     return
 
 if __name__ == "__main__":
-    df = pd.read_csv(args.input_csv)
-    get_perf_plot(df, "CPU%")
-    get_perf_plot(df, "Mem%")
+    get_one_map_metrics()
+    # df = pd.read_csv(args.input_csv)
+    # get_perf_plot(df, "CPU%")
+    # get_perf_plot(df, "Mem%")
 
-    get_map_metrics(df.Algorithm.unique())
+    # get_map_metrics(df.Algorithm.unique())
